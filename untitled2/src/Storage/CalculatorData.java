@@ -1,4 +1,4 @@
-package Data;
+package Storage;
 
 import java.util.Stack;
 
@@ -14,5 +14,6 @@ public class CalculatorData {
             }
         }
     }
+
 }
 
