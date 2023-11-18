@@ -1,20 +1,43 @@
 package Calculation;
-import Storage.Member;
 import Storage.Sign;
 
 import java.util.Stack;
 public class MyList {
-    Stack<Member> stack=new Stack<Member>();
+    static String firstLine;
+    static Stack<String> stack=new Stack<>();
+    static double answer;
     static StringBuilder postfix=new StringBuilder();
+    static StringBuilder history=new StringBuilder();
     static Stack<Sign> postfixStack =new Stack<Sign>();
-    public static void make(String number)
+    public static void makePostfix(String number)
     {
-        StringBuilder numbersFunction=new StringBuilder(number);
-        String[] numbers=number.split("(\\)|\\(|\\*|\\+|-|\\^|!|\\/)");
+        String[] lines=number.split("-");
+        for(int i=0;i<lines.length-1;i++) {
+            if (lines[i].length() == 0 || lines[i].charAt(lines[i].length()-1) == '(') {
+                lines[i] += "_1*";
+            } else {
+                lines[i] += "-";
+            }
+        }
+        StringBuilder stringBuilder=new StringBuilder();
+        for(int i=0;i< lines.length;i++)
+        {
+            stringBuilder.append(lines[i]);
+        }
+        StringBuilder numbersFunction=new StringBuilder(stringBuilder.toString());
+        String changedNumber=stringBuilder.toString();
+        String[] numbers=changedNumber.split("(\\)|\\(|\\*|\\+|-|\\^|!|\\/)");
         for(int i=0;i<numbers.length;i++)
         {
             int index=numbersFunction.indexOf(numbers[i]);
             numbersFunction.delete(index,index+numbers[i].length());
+        }
+        for(int i=0;i<numbers.length;i++)
+        {
+            if(numbers[i].equals("_1"))
+            {
+                numbers[i]="-1";
+            }
         }
         String[] line=new String[numbers.length+numbersFunction.length()];
         int count=0;
@@ -51,11 +74,12 @@ public class MyList {
         makeList(answer);
         System.out.println(postfix);
     }
-    public static void makeList(String[] ans) {
+    private static void makeList(String[] ans) {
         for (int i = 0; i < ans.length; i++) {
             Character character=ans[i].charAt(0);
             if (isNumber(ans[i])) {
                 postfix.append(ans[i]);
+                postfix.append(",");
             } else {
                 if (postfixStack.empty()) {
                     Sign sign = new Sign(character);
@@ -70,6 +94,7 @@ public class MyList {
                             }
                             char added=postfixStack.pop().character;
                             postfix.append(added);
+                            postfix.append(",");
 
                         }
                     } else {
@@ -77,6 +102,7 @@ public class MyList {
                             Sign peek = postfixStack.peek();
                             if (peek.ShouldRemove(character)) {
                                 postfix.append(postfixStack.pop().toString());
+                                postfix.append(",");
                             } else {
                                 break;
                             }
@@ -89,9 +115,41 @@ public class MyList {
         while(!postfixStack.empty())
         {
             postfix.append(postfixStack.pop().character);
+            postfix.append(",");
         }
     }
-    public static boolean isNumber(String string)
+    public static void solve()
+    {
+        String[] members=postfix.toString().split(",");
+        for(int i=0;i<members.length;i++)
+        {
+            if(isFunction(members[i])==-1)
+            {
+                stack.push(members[i]);
+            }
+            else {
+                double B=0;
+                double A=Double.parseDouble(stack.pop());
+
+                if(members[i].toCharArray()[0]!='!')
+                {
+                    B=Double.parseDouble(stack.pop());
+                }
+
+                char C=members[i].toCharArray()[0];
+                stack.push(Double.toString(calculate(A,B,C)));
+                history.append(A);
+                history.append(C);
+                if(members[i].toCharArray()[0]!='!')
+                    history.append(B);
+                history.append(",");
+            }
+        }
+        System.out.println(history);
+        answer=Double.parseDouble(stack.pop());
+        System.out.println(answer);
+    }
+    private static boolean isNumber(String string)
     {
         try {
             Double.parseDouble(string);
@@ -101,5 +159,49 @@ public class MyList {
         {
             return false;
         }
+    }
+    private static int isFunction(String string)
+    {
+        if(isNumber(string))
+        {
+            return -1;
+        }
+        char function=string.toCharArray()[0];
+        switch (function)
+        {
+            case '+':return 1;
+            case '-':return 2;
+            case '*':return 3;
+            case '/':return 4;
+            case '^':return 5;
+            case '!':return 6;
+        }
+        return -1;
+    }
+    public static double calculate(double a,double b,char function)
+    {
+        switch (function)
+        {
+            case '-':return a-b;
+            case '+':return a+b;
+            case '*':return (a*b);
+            case '/':return a/b;
+            case '^':return Math.pow(a,b);
+            case '!':
+            {
+                return factorial(a);
+            }
+        }
+        return -1;
+    }
+  private   static int factorial(double x)
+    {
+        int z= (int) Math.floor(x);
+        int number=1;
+        for(int i=z;i>1;i--)
+        {
+            number=number*i;
+        }
+        return number;
     }
 }
