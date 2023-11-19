@@ -1,0 +1,10 @@
+#my-button {
+-fx-min-width: 50px;
+-fx-min-height: 20px;
+}
+#my-button:hover{
+    -fx-background-color: blue;
+}
+#my-pane{
+    -fx-background-color: rgba(48,48,48,21);
+}

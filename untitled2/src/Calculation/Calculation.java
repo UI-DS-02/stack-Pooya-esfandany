@@ -6,12 +6,22 @@ import java.util.Stack;
 public class Calculation {
     static String firstLine;
     static Stack<String> stack=new Stack<>();
-    static double answer;
+    private static double answer;
+    public static double getAnswer()
+    {
+        return answer;
+    }
     static StringBuilder postfix=new StringBuilder();
     static StringBuilder history=new StringBuilder();
     static Stack<Sign> postfixStack =new Stack<Sign>();
     public static void makePostfix(String number)
     {
+        if(number.charAt(0)=='-')
+        {
+            StringBuilder stringBuilder=new StringBuilder(number);
+            stringBuilder.replace(0,1,"_1*");
+            number=stringBuilder.toString();
+        }
         String[] lines=number.split("-");
         for(int i=0;i<lines.length-1;i++) {
             char function=lines[i].charAt(lines[i].length()-1);
@@ -75,6 +85,13 @@ public class Calculation {
         }
         makeList(answer);
     }
+    public static double calculate(String number)
+    {
+        makePostfix(number);
+        solve();
+        return answer;
+    }
+
     private static void makeList(String[] ans) {
         for (int i = 0; i < ans.length; i++) {
             Character character=ans[i].charAt(0);
@@ -141,15 +158,16 @@ public class Calculation {
 
                 char C=members[i].toCharArray()[0];
                 stack.push(Double.toString(calculate(B,A,C)));
-                history.append(A);
+                history.append(B);
                 history.append(C);
                 if(members[i].toCharArray()[0]!='!')
-                    history.append(B);
+                    history.append(A);
                 history.append(",");
             }
         }
 
         answer=Double.parseDouble(stack.pop());
+        System.out.println(history);
     }
     private static boolean isNumber(String string)
     {
@@ -193,6 +211,7 @@ public class Calculation {
                 {
                     throw new DivisionByZero();
                 }
+                return (a/b);
             }
             case '^':return Math.pow(a,b);
             case '!':
