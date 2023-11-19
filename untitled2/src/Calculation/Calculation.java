@@ -1,8 +1,9 @@
 package Calculation;
+import Storage.Errors.DivisionByZero;
 import Storage.Sign;
 
 import java.util.Stack;
-public class MyList {
+public class Calculation {
     static String firstLine;
     static Stack<String> stack=new Stack<>();
     static double answer;
@@ -13,7 +14,8 @@ public class MyList {
     {
         String[] lines=number.split("-");
         for(int i=0;i<lines.length-1;i++) {
-            if (lines[i].length() == 0 || lines[i].charAt(lines[i].length()-1) == '(') {
+            char function=lines[i].charAt(lines[i].length()-1);
+            if (lines[i].length() == 0 || function == '(') {
                 lines[i] += "_1*";
             } else {
                 lines[i] += "-";
@@ -72,7 +74,6 @@ public class MyList {
             }
         }
         makeList(answer);
-        System.out.println(postfix);
     }
     private static void makeList(String[] ans) {
         for (int i = 0; i < ans.length; i++) {
@@ -111,12 +112,14 @@ public class MyList {
                     }
                 }
             }
+
         }
         while(!postfixStack.empty())
         {
             postfix.append(postfixStack.pop().character);
             postfix.append(",");
         }
+        System.out.println(postfix);
     }
     public static void solve()
     {
@@ -137,7 +140,7 @@ public class MyList {
                 }
 
                 char C=members[i].toCharArray()[0];
-                stack.push(Double.toString(calculate(A,B,C)));
+                stack.push(Double.toString(calculate(B,A,C)));
                 history.append(A);
                 history.append(C);
                 if(members[i].toCharArray()[0]!='!')
@@ -145,9 +148,8 @@ public class MyList {
                 history.append(",");
             }
         }
-        System.out.println(history);
+
         answer=Double.parseDouble(stack.pop());
-        System.out.println(answer);
     }
     private static boolean isNumber(String string)
     {
@@ -185,11 +187,17 @@ public class MyList {
             case '-':return a-b;
             case '+':return a+b;
             case '*':return (a*b);
-            case '/':return a/b;
+            case '/':
+            {
+                if(b==0)
+                {
+                    throw new DivisionByZero();
+                }
+            }
             case '^':return Math.pow(a,b);
             case '!':
             {
-                return factorial(a);
+                return factorial(b);
             }
         }
         return -1;

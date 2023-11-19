@@ -1,8 +1,9 @@
-import Calculation.MyList;
-
+import Calculation.Calculation;
+import Calculation.Check;
 public class  Main {
     public static void main(String[] args) {
-       MyList.makePostfix("3*(2.71+3!)");
-        MyList.solve();
+       Calculation.makePostfix("3*2");
+       Calculation.solve();
+       Check.CheckBracket("(233)*(2)(-4)+1");
     }
 }
