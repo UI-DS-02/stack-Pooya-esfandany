@@ -4,13 +4,8 @@ import Storage.Sign;
 
 import java.util.Stack;
 public class Calculation {
-    static String firstLine;
     static Stack<String> stack=new Stack<>();
     private static double answer;
-    public static double getAnswer()
-    {
-        return answer;
-    }
     static StringBuilder postfix=new StringBuilder();
     static StringBuilder history=new StringBuilder();
     static Stack<Sign> postfixStack =new Stack<Sign>();
@@ -87,8 +82,12 @@ public class Calculation {
     }
     public static double calculate(String number)
     {
+
         makePostfix(number);
         solve();
+        stack=new Stack<>();
+        postfix=new StringBuilder();
+        history=new StringBuilder();
         return answer;
     }
 
@@ -158,10 +157,24 @@ public class Calculation {
 
                 char C=members[i].toCharArray()[0];
                 stack.push(Double.toString(calculate(B,A,C)));
-                history.append(B);
+                if(B%2==1||B%2==0)
+                {
+                    String line=Double.toString(B).replace(".0","");
+                    history.append(line);
+                }
+                else {
+                    history.append(B);
+                }
                 history.append(C);
-                if(members[i].toCharArray()[0]!='!')
+                if(A%2==1||A%2==0)
+                {
+                    String line=Double.toString(A).replace(".0","");
+                    history.append(line);
+                }
+                else
+                {
                     history.append(A);
+                }
                 history.append(",");
             }
         }

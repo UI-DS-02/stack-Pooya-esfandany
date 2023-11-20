@@ -2,20 +2,28 @@ package Graphic;
 
 import Calculation.Calculation;
 import Storage.FunctionLine;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class Calculator {
-    public static FunctionLine function;
-    public static String source="C:/Users/USER/Desktop/calculator/stack-Pooya-esfandany/untitled2/";
-    static StringBuilder line=new StringBuilder("");
+public class Function {
+    static StringBuilder line=new StringBuilder();
     static Button text=new Button(line.toString());
-
-    public static Scene scene()
+    static StringBuilder added=new StringBuilder();
+    static int functionNumber=0;
+    static void Add(String a)
     {
+        if(!added.toString().contains(a))
+        {
+            functionNumber++;
+            added.append(a);
+        }
+    }
+    public static Stage stage()
+    {
+        Stage stage=new Stage();
         VBox vBox=new VBox();
         vBox.getChildren().add(text);
         GridPane numbers=new GridPane();
@@ -26,16 +34,16 @@ public class Calculator {
         Button BL=new Button("(");
         Button BR=new Button(")");
         Button factorial=new Button("!");
-        Button N1=new Button("1");
-        Button N2=new Button("2");
-        Button N3=new Button("3");
-        Button N4=new Button("4");
-        Button N5=new Button("5");
-        Button N6=new Button("6");
-        Button N7=new Button("7");
-        Button N8=new Button("8");
-        Button N9=new Button("9");
-        Button N0=new Button("0");
+        Button N1=new Button("A");
+        Button N2=new Button("B");
+        Button N3=new Button("C");
+        Button N4=new Button("D");
+        Button N5=new Button("E");
+        Button N6=new Button("F");
+        Button N7=new Button("G");
+        Button N8=new Button("X");
+        Button N9=new Button("Y");
+        Button N0=new Button("Z");
         Button dot=new Button(".");
         Button Equals=new Button("=");
         Button minus=new Button("-");
@@ -67,52 +75,63 @@ public class Calculator {
         remove.setOnMouseClicked(event -> {
             line=new StringBuilder();
             text.setText(line.toString());
+            functionNumber=0;
+            added=new StringBuilder();
         });
         N0.setOnMouseClicked(event -> {
-            line.append("0");
+            line.append("Z");
             text.setText(line.toString());
+            Add("Z");
         });
         N1.setOnMouseClicked(event -> {
-            line.append("1");
+            line.append("A");
             text.setText(line.toString());
+            Add("A");
         });
         N2.setOnMouseClicked(event -> {
-            line.append("2");
+            line.append("B");
             text.setText(line.toString());
+            Add("B");
         });
         N3.setOnMouseClicked(event -> {
-            line.append("3");
+            line.append("C");
             text.setText(line.toString());
+            Add("C");
         });
         N4.setOnMouseClicked(event -> {
-            line.append("4");
+            line.append("D");
             text.setText(line.toString());
+            Add("D");
         });
         N5.setOnMouseClicked(event -> {
-            line.append("5");
+            line.append("E");
             text.setText(line.toString());
+            Add("E");
         });
         N6.setOnMouseClicked(event -> {
-            line.append("6");
+            line.append("F");
             text.setText(line.toString());
+            Add("F");
         });
         N7.setOnMouseClicked(event -> {
-            line.append("7");
+            line.append("G");
             text.setText(line.toString());
+            Add("G");
         });
         N8.setOnMouseClicked(event -> {
-            line.append("8");
+            line.append("X");
             text.setText(line.toString());
+            Add("X");
         });
         N9.setOnMouseClicked(event -> {
-            line.append("9");
+            line.append("Y");
             text.setText(line.toString());
+            Add("Y");
         });
         Equals.setOnMouseClicked(event -> {
-            String answer=text.getText();
-            double x=Calculation.calculate(answer);
-            text.setText(Double.toString(x));
-            line=new StringBuilder(text.getText());
+            Calculator.function=new FunctionLine(line.toString(),functionNumber);
+            stage.close();
+
         });
         division.setOnMouseClicked(event -> {
             line.append("/");
@@ -169,10 +188,8 @@ public class Calculator {
         multiple.setId("my-button");
         minus.setId("my-button");
         text.setId("screen");
-        text.setAlignment(Pos.CENTER_RIGHT);
-
-        scene.getStylesheets().add("style.css");
-        return scene;
+        stage.setScene(scene);
+        return stage;
     }
 
 }

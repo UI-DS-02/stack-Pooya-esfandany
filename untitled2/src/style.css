@@ -1,10 +1,55 @@
 #my-button {
--fx-min-width: 50px;
--fx-min-height: 20px;
+-fx-min-width: 100px;
+-fx-min-height: 40px;
+ -fx-background-color: rgb(177,181,184);
+}
+#number{
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-background-color: rgb(95,99,104);
+    text-shadow : 3,3,0,white;
+    -fx-text-fill: white;
+}
+#Equal{
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-background-color: rgb(138,180,248);
+}
+#Equal:hover{
+    -fx-background-color: rgb(181,207,251);
+}
+
+#number:hover{
+    -fx-background-color: rgb(119,124,130);
+    -fx-text-fill: white;
 }
 #my-button:hover{
-    -fx-background-color: blue;
+    -fx-background-color: rgb(200,202,204);
 }
 #my-pane{
     -fx-background-color: rgba(48,48,48,21);
 }
+#delete{
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-background-color: rgb(249,0,0);
+    -fx-background-radius: 5,5,5,5;
+}
+#delete:hover{
+    -fx-background-color: rgb(254,183,153);
+}
+#screen{
+-fx-min-height: 80px;
+    -fx-text-fill: lime;
+    -fx-text-alignment: Right;
+    -fx-min-width: 409px;
+    -fx-background-color: rgb(31,31,31);
+    -fx-background-radius: 10,10,10,10;
+    -fx-font-size: 22;
+    -fx-font-family: "Lucida Console";
+;}
+#screen:hover{
+    -fx-background-color: rgb(64,64,64);
+
+}
+
