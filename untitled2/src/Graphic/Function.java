@@ -1,6 +1,5 @@
 package Graphic;
 
-import Calculation.Calculation;
 import Storage.FunctionLine;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -129,7 +128,7 @@ public class Function {
             Add("Y");
         });
         Equals.setOnMouseClicked(event -> {
-            Calculator.function=new FunctionLine(line.toString(),functionNumber);
+            Calculator.functions.addLast(new FunctionLine(line.toString(),functionNumber));
             stage.close();
 
         });
