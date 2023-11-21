@@ -33,7 +33,7 @@ public class Calculation {
         }
         StringBuilder numbersFunction=new StringBuilder(stringBuilder.toString());
         String changedNumber=stringBuilder.toString();
-        String[] numbers=changedNumber.split("(\\)|\\(|\\*|\\+|-|\\^|!|\\/)");
+        String[] numbers=changedNumber.split("(\\)|\\(|\\*|\\+|-|\\^|!|\\/|√)");
         for(int i=0;i<numbers.length;i++)
         {
             int index=numbersFunction.indexOf(numbers[i]);
@@ -92,6 +92,10 @@ public class Calculation {
     }
 
     private static void makeList(String[] ans) {
+        for(int i=0;i<ans.length;i++)
+        {
+            System.out.println(ans[i]);
+        }
         for (int i = 0; i < ans.length; i++) {
             Character character=ans[i].charAt(0);
             if (isNumber(ans[i])) {
@@ -149,9 +153,9 @@ public class Calculation {
             else {
                 double B=0;
                 double A=Double.parseDouble(stack.pop());
-
-                if(members[i].toCharArray()[0]!='!')
+                if(!(members[i].toCharArray()[0]=='!'||members[i].toCharArray()[0]=='√'))
                 {
+                    System.out.println("done");
                     B=Double.parseDouble(stack.pop());
                 }
 
@@ -208,6 +212,7 @@ public class Calculation {
             case '/':return 4;
             case '^':return 5;
             case '!':return 6;
+            case '√':return 7;
         }
         return -1;
     }
@@ -230,6 +235,10 @@ public class Calculation {
             case '!':
             {
                 return factorial(b);
+            }
+            case '√':
+            {
+                return Math.sqrt(b);
             }
         }
         return -1;

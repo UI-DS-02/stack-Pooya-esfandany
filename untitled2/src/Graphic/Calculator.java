@@ -183,7 +183,24 @@ public class Calculator {
             line.append(".");
             text.setText(line.toString());
         });
+        power.setOnMouseClicked(event -> {
+            line.append("^");
+            text.setText(line.toString());
+        });
+        e.setOnMouseClicked(event -> {
+            line.append("e");
+            text.setText(line.toString());
+        });
+        P.setOnMouseClicked(event -> {
+            line.append("π");
+            text.setText(line.toString());
+        });
+        sqrt.setOnMouseClicked(event -> {
+            line.append("√");
+            text.setText(line.toString());
+    });
         Scene scene=new Scene(vBox);
+        vBox.setSpacing(5);
         HBox hBox=new HBox();
         hBox.getChildren().addAll(numbers,function);
         vBox.getChildren().add(hBox);

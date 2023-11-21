@@ -15,6 +15,11 @@ public class Sign extends Member {
                 power = 3;
                 break;
             }
+            case '√':
+            {
+                power=3;
+                break;
+            }
             case '*': {
                 power = 2;
                 break;
