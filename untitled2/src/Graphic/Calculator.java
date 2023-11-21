@@ -154,6 +154,7 @@ public class Calculator {
             answer=answer.replace("sin","s");
             answer=answer.replace("Cos","c");
             answer=answer.replace("Cot","C");
+            answer=answer.replace("Log","L");
             double x=Calculation.calculate(answer);
             text.setText(Double.toString(x));
             line=new StringBuilder(text.getText());
@@ -174,7 +175,10 @@ public class Calculator {
             line.append("Cot(");
             text.setText(line.toString());
         });
-
+        log.setOnMouseClicked(event -> {
+            line.append("Log(");
+            text.setText(line.toString());
+        });
         division.setOnMouseClicked(event -> {
             line.append("/");
             text.setText(line.toString());

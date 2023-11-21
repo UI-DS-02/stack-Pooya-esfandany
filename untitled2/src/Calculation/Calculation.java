@@ -152,7 +152,8 @@ public class Calculation {
                 double A=Double.parseDouble(stack.pop());
                 if(!(members[i].toCharArray()[0]=='!'||members[i].toCharArray()[0]=='√'||
                 members[i].toCharArray()[0]=='C'||members[i].toCharArray()[0]=='c'||
-                members[i].toCharArray()[0]=='s'||members[i].toCharArray()[0]=='T'))
+                members[i].toCharArray()[0]=='s'||members[i].toCharArray()[0]=='T'||
+                members[i].toCharArray()[0]=='L'))
                 {
                     B=Double.parseDouble(stack.pop());
                 }
@@ -214,6 +215,7 @@ public class Calculation {
             case 'c':return 9;
             case 's':return 10;
             case 'T':return 11;
+            case 'L':return 12;
         }
         return -1;
     }
@@ -261,6 +263,10 @@ public class Calculation {
             case 's':
             {
                 return Math.sin(b);
+            }
+            case 'L':
+            {
+                return Math.log10(b);
             }
         }
         return -1;
