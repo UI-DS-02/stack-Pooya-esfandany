@@ -7,6 +7,26 @@ public class Sign extends Member {
     public Sign(char character) {
         this.character = character;
         switch (character) {
+            case 's':
+            {
+                power=5;
+                break;
+            }
+            case 'c':
+            {
+                power=5;
+                break;
+            }
+            case 'T':
+            {
+                power=5;
+                break;
+            }
+            case 'C':
+            {
+                power=5;
+                break;
+            }
             case '!': {
                 power = 4;
                 break;

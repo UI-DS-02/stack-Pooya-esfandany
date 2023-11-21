@@ -146,11 +146,35 @@ public class Calculator {
             text.setText(line.toString());
         });
         Equals.setOnMouseClicked(event -> {
+
             String answer=text.getText();
+            answer=answer.replace("e","2.718281");
+            answer=answer.replace("π","3.1415926");
+            answer=answer.replace("Tan","T");
+            answer=answer.replace("sin","s");
+            answer=answer.replace("Cos","c");
+            answer=answer.replace("Cot","C");
             double x=Calculation.calculate(answer);
             text.setText(Double.toString(x));
             line=new StringBuilder(text.getText());
         });
+        sin.setOnMouseClicked(event -> {
+            line.append("sin(");
+            text.setText(line.toString());
+        });
+        cos.setOnMouseClicked(event -> {
+            line.append("Cos(");
+            text.setText(line.toString());
+        });
+        tan.setOnMouseClicked(event -> {
+            line.append("Tan(");
+            text.setText(line.toString());
+        });
+        cot.setOnMouseClicked(event -> {
+            line.append("Cot(");
+            text.setText(line.toString());
+        });
+
         division.setOnMouseClicked(event -> {
             line.append("/");
             text.setText(line.toString());

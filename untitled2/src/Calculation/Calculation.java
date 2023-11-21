@@ -92,10 +92,7 @@ public class Calculation {
     }
 
     private static void makeList(String[] ans) {
-        for(int i=0;i<ans.length;i++)
-        {
-            System.out.println(ans[i]);
-        }
+
         for (int i = 0; i < ans.length; i++) {
             Character character=ans[i].charAt(0);
             if (isNumber(ans[i])) {
@@ -139,7 +136,7 @@ public class Calculation {
             postfix.append(postfixStack.pop().character);
             postfix.append(",");
         }
-        System.out.println(postfix);
+
     }
     public static void solve()
     {
@@ -153,9 +150,10 @@ public class Calculation {
             else {
                 double B=0;
                 double A=Double.parseDouble(stack.pop());
-                if(!(members[i].toCharArray()[0]=='!'||members[i].toCharArray()[0]=='√'))
+                if(!(members[i].toCharArray()[0]=='!'||members[i].toCharArray()[0]=='√'||
+                members[i].toCharArray()[0]=='C'||members[i].toCharArray()[0]=='c'||
+                members[i].toCharArray()[0]=='s'||members[i].toCharArray()[0]=='T'))
                 {
-                    System.out.println("done");
                     B=Double.parseDouble(stack.pop());
                 }
 
@@ -182,12 +180,11 @@ public class Calculation {
                 history.append(",");
             }
         }
-
         answer=Double.parseDouble(stack.pop());
-        System.out.println(history);
     }
     private static boolean isNumber(String string)
     {
+
         try {
             Double.parseDouble(string);
             return true;
@@ -213,6 +210,10 @@ public class Calculation {
             case '^':return 5;
             case '!':return 6;
             case '√':return 7;
+            case 'C':return 8;
+            case 'c':return 9;
+            case 's':return 10;
+            case 'T':return 11;
         }
         return -1;
     }
@@ -240,6 +241,27 @@ public class Calculation {
             {
                 return Math.sqrt(b);
             }
+            case 'c':
+            {
+
+                return Math.cos(b);
+            }
+            case 'C':
+            {
+                double cos=Math.cos(b);
+                double sin=Math.sin(b);
+                return cos/sin;
+            }
+            case 'T':
+            {
+                double cos=Math.cos(b);
+                double sin=Math.sin(b);
+                return sin/cos;
+            }
+            case 's':
+            {
+                return Math.sin(b);
+            }
         }
         return -1;
     }
@@ -253,4 +275,5 @@ public class Calculation {
         }
         return number;
     }
+
 }
