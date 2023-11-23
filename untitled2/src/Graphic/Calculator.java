@@ -8,11 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.LinkedList;
 
 public class Calculator {
-    public static LinkedList<FunctionLine> functions =new LinkedList<>();
+    public static FunctionLine functions ;
     public static String source="C:/Users/USER/Desktop/calculator/stack-Pooya-esfandany/untitled2/";
     static StringBuilder line=new StringBuilder("");
     static Button text=new Button(line.toString());
@@ -43,9 +44,8 @@ public class Calculator {
         Button Equals=new Button("=");
         Button minus=new Button("-");
         Button plus=new Button("+");
-        Button multiple=new Button("*");
-        Button division=new Button("/");
-
+        Button multiple=new Button("×");
+        Button division=new Button("÷");
         numbers.add(BL,3,0);
         numbers.add(BR,4,0);
         numbers.add(factorial,5,0);
@@ -146,15 +146,7 @@ public class Calculator {
             text.setText(line.toString());
         });
         Equals.setOnMouseClicked(event -> {
-
             String answer=text.getText();
-            answer=answer.replace("e","2.718281");
-            answer=answer.replace("π","3.1415926");
-            answer=answer.replace("Tan","T");
-            answer=answer.replace("sin","s");
-            answer=answer.replace("Cos","c");
-            answer=answer.replace("Cot","C");
-            answer=answer.replace("Log","L");
             double x=Calculation.calculate(answer);
             text.setText(Double.toString(x));
             line=new StringBuilder(text.getText());
@@ -164,7 +156,7 @@ public class Calculator {
             text.setText(line.toString());
         });
         cos.setOnMouseClicked(event -> {
-            line.append("Cos(");
+            line.append("cos(");
             text.setText(line.toString());
         });
         tan.setOnMouseClicked(event -> {
@@ -172,7 +164,7 @@ public class Calculator {
             text.setText(line.toString());
         });
         cot.setOnMouseClicked(event -> {
-            line.append("Cot(");
+            line.append("cot(");
             text.setText(line.toString());
         });
         log.setOnMouseClicked(event -> {
@@ -224,9 +216,13 @@ public class Calculator {
             text.setText(line.toString());
         });
         sqrt.setOnMouseClicked(event -> {
-            line.append("√");
+            line.append("√(");
             text.setText(line.toString());
     });
+        F.setOnMouseClicked(event -> {
+            F_intro.stage().show();
+
+        });
         Scene scene=new Scene(vBox);
         vBox.setSpacing(5);
         HBox hBox=new HBox();
@@ -247,6 +243,7 @@ public class Calculator {
         BL.setId("my-button");
         BR.setId("my-button");
         Equals.setId("Equal");
+
         remove.setId("delete");
         factorial.setId("my-button");
         division.setId("my-button");

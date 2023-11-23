@@ -82,7 +82,13 @@ public class Calculation {
     }
     public static double calculate(String number)
     {
-
+        number = number.replace("e", "2.718281");
+        number = number.replace("π", "3.1415926");
+        number = number.replace("Tan", "T");
+        number = number.replace("sin", "s");
+        number = number.replace("cos", "c");
+        number = number.replace("cot", "C");
+        number = number.replace("Log", "L");
         makePostfix(number);
         solve();
         stack=new Stack<>();
@@ -185,7 +191,6 @@ public class Calculation {
     }
     private static boolean isNumber(String string)
     {
-
         try {
             Double.parseDouble(string);
             return true;

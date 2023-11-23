@@ -42,7 +42,7 @@
 -fx-min-height: 80px;
     -fx-text-fill: lime;
     -fx-text-alignment: Right;
-    -fx-min-width: 409px;
+    -fx-min-width: 613.5px;
     -fx-background-color: rgb(31,31,31);
     -fx-background-radius: 10,10,10,10;
     -fx-font-size: 22;
@@ -52,4 +52,13 @@
     -fx-background-color: rgb(64,64,64);
 
 }
+#Delete-function
+{
+    -fx-background-color: rgb(255,15,15);
+    -fx-background-radius: 5,5,5,5;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+
+}
+
 

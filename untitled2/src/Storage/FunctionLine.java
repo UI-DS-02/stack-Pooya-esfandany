@@ -1,12 +1,13 @@
 package Storage;
 
 public class FunctionLine {
-    String line;
-    int number;
-    public FunctionLine(String line, int number)
+    public String line;
+    public char[] number;
+    public FunctionLine(String line, String chars)
     {
         this.line=line;
-        this.number=number;
+        this.number=chars.toCharArray();;
+
     }
 
 }
